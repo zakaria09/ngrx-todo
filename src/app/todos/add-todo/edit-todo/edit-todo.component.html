@@ -1,0 +1,10 @@
+<h1 *ngIf="(todo$ | async).todos.length">Edit 🖋</h1>
+<ul class="list-group" *ngFor="let todo of (todo$ | async).todos">
+  <li class="list-group-item" [contentEditable]="todo.editMode">
+    {{ todo.title }}
+    <div class="float-right">
+      <button class="btn btn-success">Save</button>
+      <button class="btn btn-danger">Cancel</button>
+    </div>
+  </li>
+</ul>

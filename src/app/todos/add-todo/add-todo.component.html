@@ -1,0 +1,7 @@
+<div class="form-group">
+  <label>Enter Todo</label>
+  <form [formGroup]="todoForm" (ngSubmit)="addTodo()">
+    <input class="form-control" formControlName="title">
+    <button class="btn btn-primary btn-lg my-3" type="submit">Add Todo</button>
+  </form>
+</div>
