@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { deleteTodo, toggleCompletedTodo, toggleEdit } from 'src/app/todo.actions';
 import { Todo } from '../../todo.reducer';
 import { map } from 'rxjs/operators';
+import { Section } from '../../Enums/Section.enum';
 
 @Component({
   selector: 'display-todos',
@@ -11,6 +12,10 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./display-todos.component.scss']
 })
 export class DisplayTodosComponent implements OnInit {
+
+  get todoSection() {
+    return Section;
+  }
 
   todo$: Observable<{ todos: Array<any> }>;
 
@@ -31,14 +36,5 @@ export class DisplayTodosComponent implements OnInit {
   editMode(todo: Todo) {
     const { id, title, complete } = todo;
     this.store.dispatch(toggleEdit({ id, title, complete , editMode: true }));
-  }
-
-  markComplete(todo) {
-    const { id, title, editMode } = todo;
-    this.store.dispatch(toggleCompletedTodo({ id, title, complete: true , editMode }));
-  }
-
-  removeTodo(todoId) {
-    this.store.dispatch(deleteTodo({ id: todoId }));
   }
 }

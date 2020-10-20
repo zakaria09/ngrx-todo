@@ -3,6 +3,10 @@
   <ul class="list-group">
     <li class="list-group-item completed">
       {{ todo.title }}
+    <action-buttons
+      [todo]="todo"
+      [section]="todoSection.completed">
+    </action-buttons>
     </li>
   </ul>
 </ng-container>

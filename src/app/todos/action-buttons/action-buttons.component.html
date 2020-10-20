@@ -1,0 +1,12 @@
+<div ngbDropdown class="d-inline-block float-right">
+  <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Status</button>
+  <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+    <ng-container *ngIf="section === sections.Todo; else elseTemplate">
+      <button ngbDropdownItem id="complete" (click)="changeCompletion(todo, true)">Completed ✅</button>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <button ngbDropdownItem id="incomplete" (click)="changeCompletion(todo, false)">Incomplete 🟧</button>
+    </ng-template>
+    <button ngbDropdownItem id="delete" (click)="removeTodo(todo.id)" class="btn btn-danger">Delete 🗑</button>
+  </div>
+</div>

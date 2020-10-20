@@ -12,6 +12,7 @@ import { EditTodoComponent } from './todos/edit-todo/edit-todo.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CompletedTodosComponent } from './todos/completed-todos/completed-todos.component';
+import { ActionButtonsComponent } from './todos/action-buttons/action-buttons.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CompletedTodosComponent } from './todos/completed-todos/completed-todos
     AddTodoComponent,
     DisplayTodosComponent,
     EditTodoComponent,
-    CompletedTodosComponent
+    CompletedTodosComponent,
+    ActionButtonsComponent
   ],
   imports: [
     BrowserModule,
