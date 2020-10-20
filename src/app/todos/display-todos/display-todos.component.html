@@ -1,0 +1,17 @@
+<h1 *ngIf="(todo$ | async).todos.length">Todo 🟧</h1>
+<ng-container *ngFor="let todo of (todo$ | async).todos">
+  <ul class="list-group">
+    <li class="list-group-item"
+      [contentEditable]="todo.editMode"
+      (dblclick)="editMode(todo)">
+      {{ todo.title }}
+      <div ngbDropdown class="d-inline-block float-right">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Status</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button ngbDropdownItem id="complete" (click)="markComplete(todo)">Completed ✅</button>
+          <button ngbDropdownItem id="delete" (click)="removeTodo(todo.id)" class="btn btn-danger">Delete 🗑</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+</ng-container>

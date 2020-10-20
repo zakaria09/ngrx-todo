@@ -1,0 +1,8 @@
+<h1 *ngIf="(todo$ | async).todos.length">Completed ✅</h1>
+<ng-container *ngFor="let todo of (todo$ | async).todos">
+  <ul class="list-group">
+    <li class="list-group-item completed">
+      {{ todo.title }}
+    </li>
+  </ul>
+</ng-container>

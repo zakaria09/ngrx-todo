@@ -21,9 +21,25 @@ const _todoReducer = createReducer(
   }),
   on(todoActions.toggleEdit, (state: State, { id, title, complete, editMode  } ) => {
     const toggleEdit = state.todos.filter(todo => todo.id !== id);
-    console.log('toggleEdit', toggleEdit)
     return { ...state, todos: [ ...toggleEdit, { id, title, complete, editMode } ] }
-  })
+  }),
+  on(todoActions.toggleEdit, (state: State, { id, title, complete, editMode  } ) => {
+    const toggleEdit = state.todos.filter(todo => todo.id !== id);
+    return { ...state, todos: [ ...toggleEdit, { id, title, complete, editMode } ] }
+  }),
+  on(todoActions.updateTodo, (state: State, { id, title, complete, editMode  } ) => {
+    const removeOldTodo = state.todos.filter(todo => todo.id !== id);
+    const updatedTodo = { id, title, complete, editMode };
+    return { ...state, todos: [ ...removeOldTodo, updatedTodo ] }
+  }),
+  on(todoActions.toggleCompletedTodo, (state: State, { id, title, complete, editMode  } ) => {
+    const toggleEdit = state.todos.filter(todo => todo.id !== id);
+    return { ...state, todos: [ ...toggleEdit, { id, title, complete, editMode } ] }
+  }),
+  on(todoActions.deleteTodo, (state: State, { id } ) => {
+    const removeDeletedTodo = state.todos.filter(todo => todo.id !== id);
+    return { ...state, todos: [ ...removeDeletedTodo ] }
+  }),
 );
 
 export function todoReducer(state, action) {

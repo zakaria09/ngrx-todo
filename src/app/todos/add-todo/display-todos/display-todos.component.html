@@ -1,6 +1,0 @@
-<h1 *ngIf="(todo$ | async).todos.length">Todo 🟧</h1>
-<ul class="list-group" *ngFor="let todo of (todo$ | async).todos">
-  <li class="list-group-item" [contentEditable]="todo.editMode" (dblclick)="edit(todo)">
-    {{ todo.title }}
-  </li>
-</ul>
