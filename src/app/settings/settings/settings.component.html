@@ -1,0 +1,10 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Welcome to the Most Customizable To Do List 🎉</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Customise the following settings 🔩</h6>
+    <p class="card-text">Re-order your todo list items <mat-slide-toggle (click)="toggleItemsReOrdering()"></mat-slide-toggle></p>
+    <div class="alert alert-success" role="alert" *ngIf="itemsCurrenlyDraggable">
+      Yay 🧩 Drag your items in the To Do list to re-order them!
+    </div>
+  </div>
+</div>

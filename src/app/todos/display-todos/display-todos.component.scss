@@ -1,8 +1,17 @@
-li:hover {
+.not-draggable:hover {
   border: 2px solid #2185ff;
   cursor: text;
 }
 
 li:active {
   color: #157cf9;
+}
+
+.draggable-items {
+  cursor: all-scroll;
+  margin: 0.5em 0;
+}
+
+.draggable-items:hover {
+  border: 2px solid #43a7ff;
 }
