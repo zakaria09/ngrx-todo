@@ -1,12 +1,14 @@
-<h1 *ngIf="(todo$ | async).todos.length">Completed ✅</h1>
-<ng-container *ngFor="let todo of (todo$ | async).todos">
-  <ul class="list-group">
-    <li class="list-group-item completed">
-      {{ todo.title }}
-    <action-buttons
-      [todo]="todo"
-      [section]="todoSection.completed">
-    </action-buttons>
-    </li>
-  </ul>
+<ng-container *ngIf="(todo$ | async).todos.length">
+  <h1>Completed ✅</h1>
+  <ng-container *ngFor="let todo of (todo$ | async).todos">
+    <ul class="list-group">
+      <li class="list-group-item completed">
+        {{ todo.title }}
+      <action-buttons
+        [todo]="todo">
+      </action-buttons>
+      </li>
+    </ul>
+  </ng-container>
+  <div class="dropdown-divider"></div>
 </ng-container>

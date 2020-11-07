@@ -1,27 +1,29 @@
-<h1 *ngIf="(todo$ | async).todos.length">In Progress 🟧</h1>
-<div cdkDropList (cdkDropListDropped)="dragAndDrop($event)">
-  <ng-container *ngFor="let todo of (todo$ | async).todos">
-    <ul class="example-list" class="list-group">
-      <ng-container *ngIf="itemsCurrenlyDraggable; else elseTemplate">
-        <li
-          cdkDrag
-          class="list-group-item draggable-items"
-          ngbTooltip="{{ todo.title }}: Drag Me!">
+<ng-container *ngIf="(todo$ | async).todos.length">
+  <h1>In Progress 🟧</h1>
+  <div cdkDropList (cdkDropListDropped)="dragAndDrop($event)">
+    <ng-container *ngFor="let todo of (todo$ | async).todos">
+      <ul class="list-group">
+        <ng-container *ngIf="itemsCurrenlyDraggable; else elseTemplate">
+          <li
+            cdkDrag
+            class="list-group-item draggable-items"
+            ngbTooltip="{{ todo.title }}: Drag Me!">
+            {{ todo.title }}
+          </li>
+        </ng-container>
+        <ng-template #elseTemplate>
+          <li
+          class="list-group-item not-draggable"
+          [contentEditable]="todo.editMode"
+          (dblclick)="editMode(todo)">
           {{ todo.title }}
+          <action-buttons
+            [todo]="todo">
+          </action-buttons>
         </li>
-      </ng-container>
-      <ng-template #elseTemplate>
-        <li
-        class="list-group-item not-draggable"
-        [contentEditable]="todo.editMode"
-        (dblclick)="editMode(todo)">
-        {{ todo.title }}
-        <action-buttons
-          [todo]="todo"
-          [section]="todoSection.Todo">
-        </action-buttons>
-      </li>
-      </ng-template>
-    </ul>
-  </ng-container>
-</div>
+        </ng-template>
+      </ul>
+    </ng-container>
+  </div>
+  <div class="dropdown-divider"></div>
+</ng-container>

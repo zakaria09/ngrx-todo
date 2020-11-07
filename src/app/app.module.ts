@@ -9,6 +9,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AddTodoComponent } from './todos/add-todo/add-todo.component';
 import { DisplayTodosComponent } from './todos/display-todos/display-todos.component';
 import { EditTodoComponent } from './todos/edit-todo/edit-todo.component';
+import { PinnedTodosComponent } from './todos/pinned-todos/pinned-todos.component';
 import { SettingsComponent } from './settings/settings/settings.component';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -27,7 +28,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     EditTodoComponent,
     CompletedTodosComponent,
     ActionButtonsComponent,
-    SettingsComponent
+    SettingsComponent,
+    PinnedTodosComponent
   ],
   imports: [
     BrowserModule,

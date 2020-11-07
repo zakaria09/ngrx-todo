@@ -31,7 +31,7 @@ export class EditTodoComponent implements OnInit {
 
   cancel(todo) {
     const { id, title, complete } = todo;
-    this.store.dispatch(toggleEdit({ id, title, complete , editMode: false }))
+    this.store.dispatch(toggleEdit({ id, title, complete , editMode: false, pinned: false }))
   }
 
   onKey(event, todo) {
@@ -46,7 +46,7 @@ export class EditTodoComponent implements OnInit {
   update(todo) {
     if (this.updatedValue.trim() !== '') {
       const { id, complete } = todo;
-      this.store.dispatch(updateTodo({ id, title: this.updatedValue, complete , editMode: false }));
+      this.store.dispatch(updateTodo({ id, title: this.updatedValue, complete , editMode: false, pinned: false }));
     }
   }
 }

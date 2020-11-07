@@ -1,0 +1,13 @@
+<ng-container *ngIf="(todos$ | async).length">
+  <h1>Pinned 📌</h1>
+  <ng-container *ngFor="let todo of (todos$ | async)">
+    <ul class="list-group">
+      <li class="list-group-item">{{ todo.title }}
+        <action-buttons
+          [todo]="todo">
+        </action-buttons>
+      </li>
+    </ul>
+  </ng-container>
+  <div class="dropdown-divider"></div>
+</ng-container>

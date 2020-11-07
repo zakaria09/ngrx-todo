@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { deleteTodo, toggleCompletedTodo } from 'src/app/todo.actions';
 import { Todo } from '../../todo.reducer';
-import { Section } from '../../Enums/Section.enum';
+import { togglePinnedTodo } from '../../todo.actions';
 
 @Component({
   selector: 'action-buttons',
@@ -11,12 +11,7 @@ import { Section } from '../../Enums/Section.enum';
 })
 export class ActionButtonsComponent implements OnInit {
 
-  get sections() {
-    return Section;
-  }
-
   @Input() todo: Todo;
-  @Input() section;
 
   constructor(private readonly store: Store) { }
 
@@ -25,7 +20,12 @@ export class ActionButtonsComponent implements OnInit {
 
   changeCompletion(todo, isCompleted: boolean) {
     const { id, title, editMode } = todo;
-    this.store.dispatch(toggleCompletedTodo({ id, title, complete: isCompleted , editMode }));
+    this.store.dispatch(toggleCompletedTodo({ id, title, complete: isCompleted , editMode, pinned: false }));
+  }
+
+  togglePinned(todo, isPinned) {
+    const { id, title, editMode, complete } = todo;
+    this.store.dispatch(togglePinnedTodo({ id, title, complete , editMode, pinned: isPinned }));
   }
 
   removeTodo(todoId) {

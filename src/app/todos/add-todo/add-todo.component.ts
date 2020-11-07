@@ -25,7 +25,7 @@ export class AddTodoComponent implements OnInit {
   addTodo() {
     if (this.todoForm.valid) {
       const { title } =  this.todoForm.value
-      const todo: Todo = { id: new Date().getTime(), title, complete: false, editMode: false }
+      const todo: Todo = { id: new Date().getTime(), title, complete: false, editMode: false, pinned: false }
       this.store.dispatch(addTodo({...todo}));
       this.todoForm.reset();
     }

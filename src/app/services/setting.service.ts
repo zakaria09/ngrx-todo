@@ -2,7 +2,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Injectable, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, pluck } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,9 +23,11 @@ export class SettingService implements OnInit {
   getInProgressTodos() {
     return this.store.pipe(
       select('todos'),
-      map((val: {todos: any}) => {
-        const notEditable: Array<any> = val.todos.filter(t => t.editMode !== true);
-        const notEditableAndInComplete = notEditable.filter(t => t.complete !== true);
+      pluck('todos'),
+      map((todos: Array<any>) => {
+        const notEditable: Array<any> = todos.filter(t => t.editMode !== true);
+        const notPinned: Array<any> = notEditable.filter(t => t.pinned !== true);
+        const notEditableAndInComplete = notPinned.filter(t => t.complete !== true);
         return { todos: notEditableAndInComplete };
       })
     );
@@ -34,8 +36,8 @@ export class SettingService implements OnInit {
   listenToReOrderingOfTodos() {
     return this.getInProgressTodos()
       .pipe(
-        map((val: {todos: any}) => {
-          const todos = val.todos;
+        pluck('todos'),
+        map(todos => {
           this.todosOrder = todos;
           return { todos: this.todosOrder };
         })

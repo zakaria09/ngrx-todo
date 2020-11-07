@@ -3,8 +3,6 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { deleteTodo, toggleCompletedTodo, toggleEdit } from 'src/app/todo.actions';
 import { Todo } from '../../todo.reducer';
-import { map } from 'rxjs/operators';
-import { Section } from '../../Enums/Section.enum';
 import { SettingService } from '../../services/setting.service';
 
 @Component({
@@ -15,10 +13,6 @@ import { SettingService } from '../../services/setting.service';
 export class DisplayTodosComponent implements OnInit {
 
   itemsCurrenlyDraggable: boolean;
-
-  get todoSection() {
-    return Section;
-  }
 
   todo$: Observable<{ todos: Array<any> }>;
 
@@ -35,7 +29,7 @@ export class DisplayTodosComponent implements OnInit {
 
   editMode(todo: Todo) {
     const { id, title, complete } = todo;
-    this.store.dispatch(toggleEdit({ id, title, complete , editMode: true }));
+    this.store.dispatch(toggleEdit({ id, title, complete , editMode: true, pinned: false }));
   }
 
   dragAndDrop(event) {
