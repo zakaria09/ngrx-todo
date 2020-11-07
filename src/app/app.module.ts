@@ -18,7 +18,6 @@ import { CompletedTodosComponent } from './todos/completed-todos/completed-todos
 import { ActionButtonsComponent } from './todos/action-buttons/action-buttons.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -42,8 +41,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     NgbModule,
     FormsModule,
     BrowserAnimationsModule,
-    DragDropModule,
-    MatSlideToggleModule
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]
