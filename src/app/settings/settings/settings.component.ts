@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SettingService } from '../../services/setting.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-settings',
@@ -9,6 +10,10 @@ import { SettingService } from '../../services/setting.service';
 export class SettingsComponent implements OnInit {
 
   itemsCurrenlyDraggable: boolean;
+
+  get currentLimit(): Observable<number> {
+    return this.settingService.limit$;
+  }
 
   constructor(
     private settingService: SettingService
@@ -23,4 +28,9 @@ export class SettingsComponent implements OnInit {
     const toggleDraggable = !this.itemsCurrenlyDraggable
     this.settingService.makeItemsDraggable(toggleDraggable);
   }
+
+  valueChanged(setLimit) {
+    const limit = Number(setLimit);
+    this.settingService.changeLimit(limit);
+}
 }

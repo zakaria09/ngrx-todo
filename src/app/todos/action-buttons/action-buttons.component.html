@@ -1,12 +1,14 @@
 <div ngbDropdown class="d-inline-block float-right">
   <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Status</button>
   <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-    <ng-container *ngIf="todo.pinned; else pin">
-      <button ngbDropdownItem id="unpin" (click)="togglePinned(todo, false)">Unpin 📌</button>
+    <ng-container *ngIf="!todo.complete">
+      <ng-container *ngIf="todo.pinned; else pin">
+        <button ngbDropdownItem id="unpin" (click)="togglePinned(todo, false)">Unpin 📌</button>
+      </ng-container>
+      <ng-template #pin>
+        <button ngbDropdownItem id="pin" (click)="togglePinned(todo, true)">Pin 📌</button>
+      </ng-template>
     </ng-container>
-    <ng-template #pin>
-      <button ngbDropdownItem id="pin" (click)="togglePinned(todo, true)">Pin 📌</button>
-    </ng-template>
     <ng-container *ngIf="!todo.complete; else incomplete">
       <button ngbDropdownItem id="complete" (click)="changeCompletion(todo, true)">Completed ✅</button>
     </ng-container>

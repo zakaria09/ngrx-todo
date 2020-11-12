@@ -11,5 +11,7 @@
     <div class="alert alert-success" role="alert" *ngIf="itemsCurrenlyDraggable">
       Yay 🧩 Drag your items in the To Do list to re-order them!
     </div>
+    <label>Current Limit On Todos In Progress: {{ currentLimit | async }}</label>
+    <input type="range" class="custom-range" min="1" max="5" step="1" value="{{ currentLimit | async }}" (input)="valueChanged($event.target.value)">
   </div>
 </div>

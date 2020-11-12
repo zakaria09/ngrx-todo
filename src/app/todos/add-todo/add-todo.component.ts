@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store, props } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { addTodo } from '../../todo.actions';
 import { Todo } from '../../todo.reducer';
+import { SettingService } from '../../services/setting.service';
 
 @Component({
   selector: 'add-todo',
@@ -14,12 +15,29 @@ export class AddTodoComponent implements OnInit {
 
   todoForm: FormGroup;
 
-  constructor(private store: Store<{ todo }>) {}
+  outstanding: number;
+  limit: number;
+
+  get isLimitReached(): boolean {
+    return this.outstanding >= this.limit;
+  };
+
+  constructor(
+    private store: Store<{ todo }>,
+    private settingService: SettingService
+    ) {}
 
   ngOnInit() {
     this.todoForm = new FormGroup({
       title: new FormControl('', Validators.required)
     });
+    const outstanding$ = this.settingService.getOutStandingTodos();
+    const { limit$ } = this.settingService;
+    combineLatest([outstanding$, limit$])
+      .subscribe((values: Array<number>) => {
+        this.outstanding = values[0];
+        this.limit = values[1];
+    })
   }
 
   addTodo() {
