@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { addTodo } from './todo.actions';
+import { SettingService } from './services/setting.service';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +8,13 @@ import { addTodo } from './todo.actions';
 })
 export class AppComponent implements OnInit {
 
+  isLimitReached: boolean;
 
+  constructor(private settingService: SettingService) {}
 
-  constructor() {}
-
-  ngOnInit() {}
+  ngOnInit() {
+    this.settingService.isLimitReached$
+      .subscribe(isReached => this.isLimitReached = isReached);
+  }
 
 }

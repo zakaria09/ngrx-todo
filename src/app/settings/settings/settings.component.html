@@ -1,17 +1,24 @@
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title">Welcome to the Most Customizable To Do List 🎉</h5>
+    <!-- <h5 class="card-title">Welcome to the Most Customizable To Do List 🎉</h5> -->
     <h6 class="card-subtitle mb-2 text-muted">Customise the following settings 🔩</h6>
-    <p class="card-text">Re-order your todo list items</p>
     <div class="btn-group-toggle" data-toggle="buttons">
-      <label class="btn btn-light" [class.active]="itemsCurrenlyDraggable">
-        <input type="checkbox" (click)="toggleItemsReOrdering()" [checked]="itemsCurrenlyDraggable"> Move
+      <label class="btn btn-primary" [class.active]="itemsCurrenlyDraggable">
+        {{ !itemsCurrenlyDraggable ? 'Re-order your todo list items': 'Save' }}
+        <input type="checkbox" (click)="toggleItemsReOrdering()" [checked]="itemsCurrenlyDraggable">
       </label>
     </div>
     <div class="alert alert-success" role="alert" *ngIf="itemsCurrenlyDraggable">
       Yay 🧩 Drag your items in the To Do list to re-order them!
     </div>
-    <label>Current Limit On Todos In Progress: {{ currentLimit | async }}</label>
-    <input type="range" class="custom-range" min="1" max="5" step="1" value="{{ currentLimit | async }}" (input)="valueChanged($event.target.value)">
+    <label>Limit Todos In Progress: {{ currentLimit | async }}</label>
+    <input
+      type="range"
+      class="custom-range"
+      [min]="minimumTodos"
+      max="5"
+      step="1"
+      value="{{ currentLimit | async }}"
+      (input)="valueChanged($event.target.value)">
   </div>
 </div>

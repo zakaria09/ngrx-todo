@@ -12,6 +12,7 @@ export class SettingService implements OnInit {
   todosOrder: Array<any>;
   itemsDraggable: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   limit$: BehaviorSubject<number> = new BehaviorSubject<number>(3);
+  isLimitReached$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private readonly store: Store<{ todos }>) { }
 
@@ -19,6 +20,10 @@ export class SettingService implements OnInit {
 
   makeItemsDraggable(isDraggable: boolean) {
     this.itemsDraggable.next(isDraggable);
+  }
+
+  limitHasBeenReached(isReached: boolean) {
+    this.isLimitReached$.next(isReached);
   }
 
   changeLimit(newLimit: number) {

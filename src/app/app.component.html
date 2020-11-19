@@ -1,6 +1,26 @@
 <div class="container">
-  <app-settings></app-settings>
-  <add-todo></add-todo>
+
+  <ngb-accordion #acc="ngbAccordion">
+    <ngb-panel id="toggle-1" title="Customise Settings">
+      <ng-template ngbPanelContent>
+        <app-settings></app-settings>
+      </ng-template>
+    </ngb-panel>
+    <ngb-panel id="toggle-2" title="Statistics">
+      <ng-template ngbPanelContent>
+
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+
+  <ng-container *ngIf="!isLimitReached; else limitReached">
+    <add-todo></add-todo>
+  </ng-container>
+  <ng-template #limitReached>
+    <div class="alert alert-info" role="alert">
+      You have reached your limit! Either complete some more todos in progress or change your limit in settings.
+    </div>
+  </ng-template>
   <pinned-todos></pinned-todos>
   <edit-todos></edit-todos>
   <completed-todos></completed-todos>

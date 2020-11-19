@@ -37,6 +37,7 @@ export class AddTodoComponent implements OnInit {
       .subscribe((values: Array<number>) => {
         this.outstanding = values[0];
         this.limit = values[1];
+        this.settingService.limitHasBeenReached(this.isLimitReached);
     })
   }
 

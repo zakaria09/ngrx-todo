@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 export class SettingsComponent implements OnInit {
 
   itemsCurrenlyDraggable: boolean;
+  minimumTodos: number = 1;
 
   get currentLimit(): Observable<number> {
     return this.settingService.limit$;
@@ -22,6 +23,12 @@ export class SettingsComponent implements OnInit {
   ngOnInit() {
     this.settingService.itemsDraggable
       .subscribe(isDraggable => this.itemsCurrenlyDraggable = isDraggable)
+    this.settingService.getOutStandingTodos()
+      .subscribe(outstanding => {
+        if(outstanding > 0) {
+          this.minimumTodos = outstanding
+        }
+      })
   }
 
   toggleItemsReOrdering() {
