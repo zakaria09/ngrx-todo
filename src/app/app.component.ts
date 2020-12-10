@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SettingService } from './services/setting.service';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +7,8 @@ import { SettingService } from './services/setting.service';
 })
 export class AppComponent implements OnInit {
 
-  isLimitReached: boolean;
+  constructor() {}
 
-  constructor(private settingService: SettingService) {}
-
-  ngOnInit() {
-    this.settingService.isLimitReached$
-      .subscribe(isReached => this.isLimitReached = isReached);
-  }
+  ngOnInit() {}
 
 }

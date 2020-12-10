@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Store, props } from '@ngrx/store';
-import { combineLatest, Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { combineLatest } from 'rxjs';
 import { addTodo } from '../../todo.actions';
 import { Todo } from '../../todo.reducer';
 import { SettingService } from '../../services/setting.service';
@@ -9,7 +9,8 @@ import { SettingService } from '../../services/setting.service';
 @Component({
   selector: 'add-todo',
   templateUrl: './add-todo.component.html',
-  styleUrls: ['./add-todo.component.scss']
+  styleUrls: ['./add-todo.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddTodoComponent implements OnInit {
 
@@ -42,12 +43,13 @@ export class AddTodoComponent implements OnInit {
   }
 
   addTodo() {
-    if (this.todoForm.valid) {
+    const { valid, value } = this.todoForm;
+    if (valid && value.title.trim()) {
       const { title } =  this.todoForm.value
       const todo: Todo = { id: new Date().getTime(), title, complete: false, editMode: false, pinned: false }
       this.store.dispatch(addTodo({...todo}));
-      this.todoForm.reset();
     }
+    this.todoForm.reset();
   }
 
 }

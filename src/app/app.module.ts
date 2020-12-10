@@ -6,29 +6,19 @@ import { StoreModule } from '@ngrx/store';
 import { todoReducer } from './todo.reducer';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { AddTodoComponent } from './todos/add-todo/add-todo.component';
-import { DisplayTodosComponent } from './todos/display-todos/display-todos.component';
-import { EditTodoComponent } from './todos/edit-todo/edit-todo.component';
-import { PinnedTodosComponent } from './todos/pinned-todos/pinned-todos.component';
 import { SettingsComponent } from './settings/settings/settings.component';
+import { TodosModule } from './todos/todos.module';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { CompletedTodosComponent } from './todos/completed-todos/completed-todos.component';
-import { ActionButtonsComponent } from './todos/action-buttons/action-buttons.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DragDropModule } from '@angular/cdk/drag-drop';
+import { AutoselectDirective } from './directives/autoselect.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AddTodoComponent,
-    DisplayTodosComponent,
-    EditTodoComponent,
-    CompletedTodosComponent,
-    ActionButtonsComponent,
     SettingsComponent,
-    PinnedTodosComponent
+    AutoselectDirective
   ],
   imports: [
     BrowserModule,
@@ -41,7 +31,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     NgbModule,
     FormsModule,
     BrowserAnimationsModule,
-    DragDropModule
+    TodosModule
   ],
   providers: [],
   bootstrap: [AppComponent]

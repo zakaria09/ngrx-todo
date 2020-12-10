@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -7,7 +7,8 @@ import { toggleEdit, updateTodo } from 'src/app/todo.actions';
 @Component({
   selector: 'edit-todos',
   templateUrl: './edit-todo.component.html',
-  styleUrls: ['./edit-todo.component.scss']
+  styleUrls: ['./edit-todo.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditTodoComponent implements OnInit {
 

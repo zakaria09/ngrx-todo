@@ -3,7 +3,7 @@
   <div cdkDropList (cdkDropListDropped)="dragAndDrop($event)">
     <ng-container *ngFor="let todo of (todo$ | async).todos">
       <ul class="list-group">
-        <ng-container *ngIf="itemsCurrenlyDraggable; else elseTemplate">
+        <ng-container *ngIf="(itemsCurrenlyDraggable | async); else notDraggable">
           <li
             cdkDrag
             class="list-group-item draggable-items"
@@ -11,7 +11,7 @@
             {{ todo.title }}
           </li>
         </ng-container>
-        <ng-template #elseTemplate>
+        <ng-template #notDraggable>
           <li
           class="list-group-item not-draggable"
           [contentEditable]="todo.editMode"
@@ -19,6 +19,7 @@
           {{ todo.title }}
           <action-buttons
             [todo]="todo">
+            <button ngbDropdownItem id="pin" (click)="togglePinned(todo, true)">Pin 📌</button>
           </action-buttons>
         </li>
         </ng-template>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -6,7 +6,8 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'completed-todos',
   templateUrl: './completed-todos.component.html',
-  styleUrls: ['./completed-todos.component.scss']
+  styleUrls: ['./completed-todos.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CompletedTodosComponent implements OnInit {
 

@@ -2,7 +2,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Injectable, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, pluck, tap } from 'rxjs/operators';
+import { map, pluck } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +10,13 @@ import { map, pluck, tap } from 'rxjs/operators';
 export class SettingService implements OnInit {
 
   todosOrder: Array<any>;
-  itemsDraggable: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private itemsDraggable: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   limit$: BehaviorSubject<number> = new BehaviorSubject<number>(3);
   isLimitReached$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  get isItemsDraggable() {
+    return this.itemsDraggable.asObservable();
+  }
 
   constructor(private readonly store: Store<{ todos }>) { }
 

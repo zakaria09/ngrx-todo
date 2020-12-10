@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { deleteTodo, toggleCompletedTodo, toggleEdit } from 'src/app/todo.actions';
+import { toggleEdit, togglePinnedTodo } from 'src/app/todo.actions';
 import { Todo } from '../../todo.reducer';
 import { SettingService } from '../../services/setting.service';
 
 @Component({
   selector: 'display-todos',
   templateUrl: './display-todos.component.html',
-  styleUrls: ['./display-todos.component.scss']
+  styleUrls: ['./display-todos.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DisplayTodosComponent implements OnInit {
 
-  itemsCurrenlyDraggable: boolean;
+  itemsCurrenlyDraggable: Observable<any>;
 
   todo$: Observable<{ todos: Array<any> }>;
 
@@ -23,8 +24,7 @@ export class DisplayTodosComponent implements OnInit {
 
   ngOnInit() {
     this.todo$ = this.settingService.listenToReOrderingOfTodos();
-    this.settingService.itemsDraggable
-      .subscribe(isDraggable => this.itemsCurrenlyDraggable = isDraggable)
+    this.itemsCurrenlyDraggable = this.settingService.isItemsDraggable;
   }
 
   editMode(todo: Todo) {
@@ -34,5 +34,10 @@ export class DisplayTodosComponent implements OnInit {
 
   dragAndDrop(event) {
     this.settingService.drop(event);
+  }
+
+  togglePinned(todo, isPinned) {
+    const { id, title, editMode, complete } = todo;
+    this.store.dispatch(togglePinnedTodo({ id, title, complete , editMode, pinned: isPinned }));
   }
 }

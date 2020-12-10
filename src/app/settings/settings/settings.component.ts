@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { SettingService } from '../../services/setting.service';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.scss']
+  styleUrls: ['./settings.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsComponent implements OnInit {
 
@@ -21,7 +22,7 @@ export class SettingsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.settingService.itemsDraggable
+    this.settingService.isItemsDraggable
       .subscribe(isDraggable => this.itemsCurrenlyDraggable = isDraggable)
     this.settingService.getOutStandingTodos()
       .subscribe(outstanding => {
@@ -39,5 +40,5 @@ export class SettingsComponent implements OnInit {
   valueChanged(setLimit) {
     const limit = Number(setLimit);
     this.settingService.changeLimit(limit);
-}
+  }
 }

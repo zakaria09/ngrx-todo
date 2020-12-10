@@ -2,7 +2,7 @@
   <h1>Edit 🖋</h1>
   <ul class="list-group" *ngFor="let todo of (todo$ | async).todos">
     <li class="list-group-item select-all" [contentEditable]="todo.editMode">
-      <input type="text" class="form-control float-left" [value]="todo.title" (keyup)="onKey($event, todo)" (click)="$event.target.select()">
+      <input type="text" class="form-control float-left" autoselect [value]="todo.title" (keyup)="onKey($event, todo)">
       <div class="actions float-right">
         <button (click)="update(todo)" class="btn btn-success btn-medium mx-1">Save</button>
         <button (click)="cancel(todo)" class="btn btn-danger btn-medium">Cancel</button>

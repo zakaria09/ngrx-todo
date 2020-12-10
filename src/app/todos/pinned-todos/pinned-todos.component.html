@@ -5,6 +5,7 @@
       <li class="list-group-item">{{ todo.title }}
         <action-buttons
           [todo]="todo">
+          <button ngbDropdownItem id="unpin" (click)="togglePinned(todo, false)">Unpin 📌</button>
         </action-buttons>
       </li>
     </ul>
